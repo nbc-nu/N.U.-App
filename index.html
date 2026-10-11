@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+      background-color: white;
+      color: #333;
+    }
+    h1 { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+  <h1>Donwload N.U. App!</h1>
+  <p>Open services, make tables, send messages and evrything you can in N.U. site and more!<br>Donwload the app with the button up, or click in options, then install and create shortcut, then select install!</p>
+
+  <script>
+    // Se já estiver instalado, redireciona imediatamente
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+      window.location.href = 'https://sites.google.com/view/nu-nbc/app';
+    }
+
+    // Registro do Service Worker obrigatório
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js');
+      });
+    }
+  </script>
+</body>
+</html>

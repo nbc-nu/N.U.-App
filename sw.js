@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pwa-download-v2';
+const CACHE_NAME = 'nu-app-cache-v1';
 
 
 const ASSETS = [

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
+  <title>App</title>
   <link rel="manifest" href="manifest.json">
   <style>
     body {
@@ -22,16 +22,37 @@
 </head>
 <body>
 
-  <h1>Donwload N.U. App!</h1>
-  <p>Open services, make tables, send messages and evrything you can in N.U. site and more!<br>Donwload the app with the button up, or click in options, then install and create shortcut, then select install!</p>
+  <h1>Install this app!</h1>
+  <p>Click in the download button in the URL bar (chrome)<br>Click in + then, add at homescreen (samsung browser)<br>Click in the install button in the message that may appear in the screen. (other browsers)</p>
 
   <script>
-    // Se já estiver instalado, redireciona imediatamente
-    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
-      window.location.href = 'https://sites.google.com/view/nu-nbc/app';
+
+    const isPWA = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+    if (isPWA) {
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const codeValue = urlParams.get('code');
+
+      if (codeValue) {
+        try {
+
+          const base64Encoded = btoa(unescape(encodeURIComponent(codeValue)));
+          
+
+          window.location.href = "https://nbc-nu.github.io/n.u.-apps/view?c=" + base64Encoded;
+        } catch (error) {
+          console.error("Error: ", error);
+
+          window.location.href = 'https://nbc-nu.github.io/n.u.-apps/';
+        }
+      } else {
+
+        window.location.href = 'https://nbc-nu.github.io/n.u.-apps/';
+      }
     }
 
-    // Registro do Service Worker obrigatório
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js');
